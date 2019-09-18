@@ -21,15 +21,13 @@ RUN apt-get update && \
 # Install Java 
 RUN echo "deb http://ftp.de.debian.org/debian stretch-backports main contrib non-free" > /etc/apt/sources.list.d/debian-backports.list && \
     apt-get update && \ 
-    apt-get install -y --no-install-recommends ca-certificates openjdk-11-jre openjdk-11-jdk-headless openjdk-11-jdk && \
-    apt-get clean all && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Add and set default locale
-RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
+    apt-get install -y --no-install-recommends ca-certificates openjdk-11-jdk-headless openjdk-11-jdk && \
+    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen en_US.UTF-8 && \
     dpkg-reconfigure locales && \
-    /usr/sbin/update-locale LANG=en_US.UTF-8
+    /usr/sbin/update-locale LANG=en_US.UTF-8 && \
+    apt-get clean all && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN cd /srv && \
     wget https://downloads.jboss.org/infinispan/$INFINISPAN_VERSION/infinispan-server-$INFINISPAN_VERSION.zip && \
