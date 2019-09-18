@@ -12,14 +12,8 @@ ENV TZ Europe/Berlin
 RUN apt-get update && \
     apt-get -y --no-install-recommends install \
         wget \
-        curl \
-        ca-certificates \
-        apt-transport-https \
-        gnupg2 \
-        dirmngr \
-        procps \
         locales \
-	unzip \
+        unzip \
         software-properties-common && \
     apt-get clean all && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
